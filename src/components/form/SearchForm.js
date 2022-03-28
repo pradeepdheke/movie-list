@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
-import { Button, Col, Form, Row } from 'react-bootstrap';
+import { Button, Col, Form, Row, Alert } from 'react-bootstrap';
 import { CustomCard } from '../card/CustomCard';
 import { fetchMovie } from '../../helper/axiosHelper';
-import { Alert } from 'bootstrap';
+
 
 export const SearchForm = () => {
 const [search, setSearch] = useState("");
