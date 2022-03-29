@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 
-import { Button, Col, Form, Row, Alert } from 'react-bootstrap';
-import { CustomCard } from '../card/CustomCard';
-import { fetchMovie } from '../../helper/axiosHelper';
+import { Button, Col, Form, Row } from 'react-bootstrap';
 
 
-export const SearchForm = () => {
+
+export const SearchForm = ({getMovie}) => {
 const [search, setSearch] = useState("");
-const [movie, setMovie] = useState({});
+
 
 const handleOnChange = e => {
 
@@ -16,41 +15,26 @@ const handleOnChange = e => {
     setSearch(value);
 };
 
+
 const handleOnSubmit = async e => {
     e.preventDefault();
-
-
-    const movie = await fetchMovie(search);
-    setMovie(movie.data);
+    getMovie(search);
+    setSearch("");
 };
-
-console.log(movie);
-
   return (
       <>
     <Form onSubmit={handleOnSubmit}>
   <Row>
       <Col></Col>
     <Col>
-      <Form.Control placeholder="Search..." onChange={handleOnChange} required/>
+      <Form.Control placeholder="Search..." onChange={handleOnChange} value={search} required/>
     </Col>
     <Col>
       <Button variant = "warning" type= "submit">Search</Button>
     </Col>
   </Row>
 </Form>
-<Row>
-    <Col className='d-flex justify-content-center'>
-    {movie.Response === "True" &&  <CustomCard movie = {movie}/>}
-        
-    {movie.Response === "False" && (
 
-    <Alert variant="danger">{movie.Error}</Alert>
-    )}
-
-        
-    </Col>
-    </Row>
       </>
 
   );
