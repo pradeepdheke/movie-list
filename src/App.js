@@ -12,6 +12,7 @@ const App = () => {
   
   const [movieList, setMovieList] = useState([]);
   const [movie, setMovie] = useState({});
+  const [category, setCategory] = useState("");
 
 
 const getMovie = async search => {
@@ -45,20 +46,9 @@ const getMovie = async search => {
       
     };
 
-    const handleOnSelect = (cat) => {
-      let filterArgs = [];
-
-      if (cat) {
-        filterArgs = movieList.filter(itm => itm.cat === cat);
-
-      } else {
-        filterArgs = movieList;
-      }
-      setMovieList(filterArgs);
-      // happy selected
-      // lazy selected
-      // all selected
-    } 
+    const moviesToDisplay = category
+    ?movieList.filter(item => item.cat === category)
+    :movieList;
 
 
   return (
@@ -84,7 +74,11 @@ const getMovie = async search => {
 
 
        <hr/>
-       <MovieList movieList={movieList} handleOnDelete = {handleOnDelete} handleOnSelect={handleOnSelect}/>
+
+       {category || "ALL"} selected
+
+
+       <MovieList movieList={moviesToDisplay} handleOnDelete = {handleOnDelete} setCategory={setCategory}/>
      </Container>
        
    </div>

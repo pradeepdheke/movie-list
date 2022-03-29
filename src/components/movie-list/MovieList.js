@@ -2,16 +2,16 @@ import React from 'react'
 import { Button, ButtonGroup, Col, Row } from 'react-bootstrap'
 import { CustomCard } from '../card/CustomCard'
 
-export const MovieList = ({movieList, handleOnDelete, handleOnSelect}) => {
+export const MovieList = ({movieList, handleOnDelete, setCategory}) => {
   return (
     <Row>
         <Col>
         <div className="filter d-flex justify-content-between py-3">
             
         <ButtonGroup aria-label="Basic example" size="lg">
-  <Button variant="secondary" onClick={()=>handleOnSelect()}>ALL</Button>
-  <Button variant="success" onClick={()=>handleOnSelect("happy")}>HAPPY</Button>
-  <Button variant="warning" onClick={()=>handleOnSelect("lazy")}>LAZY</Button>
+  <Button variant="secondary" onClick={()=>setCategory("")}>ALL</Button>
+  <Button variant="success" onClick={()=>setCategory("happy")}>HAPPY</Button>
+  <Button variant="warning" onClick={()=>setCategory("lazy")}>LAZY</Button>
 </ButtonGroup>
         <ButtonGroup aria-label="Basic example" size="lg">
   <Button variant="danger">GRID</Button>
