@@ -31,7 +31,7 @@ const getMovie = async search => {
 
     if (!isExist) {
       setMovieList([...movieList, obj]);
-      setMovieMainList([...movieList, obj]);
+      setMovieMainList([...movieMainList, obj]);
       setMovie({})
     } else {
       alert("Movie already exists in the list!!");
@@ -41,7 +41,7 @@ const getMovie = async search => {
     };
 
     const handleOnDelete = imdbID => {
-      const filterdList = movieList.filter(itm=> itm.imdbID !== imdbID);
+      const filterdList = movieMainList.filter(itm=> itm.imdbID !== imdbID);
       setMovieList(filterdList);
       setMovieMainList(filterdList);
     };
