@@ -9,9 +9,11 @@ import { fetchMovie } from './helper/axiosHelper';
 
 
 const App = () => {
-  const [movieMainList, setMovieMainList] = useState([]);
+  
   const [movieList, setMovieList] = useState([]);
   const [movie, setMovie] = useState({});
+  const [category, setCategory] = useState("");
+  
 
 
 const getMovie = async search => {
@@ -24,14 +26,13 @@ const getMovie = async search => {
   const handleOnAddToList = (cat, movie) => {
     const obj = {...movie, cat};
 
-    !movieList.length && setMovieList([obj]) && setMovieMainList([obj]);
+    !movieList.length && setMovieList([obj]);
 
 
     const isExist = movieList.find(item => item.imdbID === movie.imdbID);
 
     if (!isExist) {
       setMovieList([...movieList, obj]);
-      setMovieMainList([...movieMainList, obj]);
       setMovie({})
     } else {
       alert("Movie already exists in the list!!");
@@ -41,25 +42,14 @@ const getMovie = async search => {
     };
 
     const handleOnDelete = imdbID => {
-      const filterdList = movieMainList.filter(itm=> itm.imdbID !== imdbID);
+      const filterdList = movieList.filter(itm=> itm.imdbID !== imdbID);
       setMovieList(filterdList);
-      setMovieMainList(filterdList);
+      
     };
 
-    const handleOnSelect = (cat) => {
-      let filterArgs = [];
-
-      if (cat) {
-        filterArgs = movieMainList.filter(itm => itm.cat === cat);
-
-      } else {
-        filterArgs = movieMainList;
-      }
-      setMovieList(filterArgs);
-      // happy selected
-      // lazy selected
-      // all selected
-    } 
+    const moviesToDisplay = category
+    ?movieList.filter(item => item.cat === category)
+    :movieList;
 
 
   return (
@@ -85,7 +75,15 @@ const getMovie = async search => {
 
 
        <hr/>
-       <MovieList movieList={movieList} handleOnDelete = {handleOnDelete} handleOnSelect={handleOnSelect}/>
+
+       {category || "ALL"} selected
+
+
+       <MovieList 
+       movieList={moviesToDisplay} 
+       handleOnDelete = {handleOnDelete} 
+       setCategory={setCategory} 
+       />
      </Container>
        
    </div>
