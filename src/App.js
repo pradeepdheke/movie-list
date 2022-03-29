@@ -13,6 +13,7 @@ const App = () => {
   const [movieList, setMovieList] = useState([]);
   const [movie, setMovie] = useState({});
   const [category, setCategory] = useState("");
+  
 
 
 const getMovie = async search => {
@@ -78,7 +79,11 @@ const getMovie = async search => {
        {category || "ALL"} selected
 
 
-       <MovieList movieList={moviesToDisplay} handleOnDelete = {handleOnDelete} setCategory={setCategory}/>
+       <MovieList 
+       movieList={moviesToDisplay} 
+       handleOnDelete = {handleOnDelete} 
+       setCategory={setCategory} 
+       />
      </Container>
        
    </div>
